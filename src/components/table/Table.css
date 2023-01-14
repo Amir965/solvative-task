@@ -27,4 +27,12 @@ td{
 td,th{
    padding: 8px;
     border-color: rgb(222,226,230);
+    text-align: left;
 } 
+
+.dropdown{
+    margin: 10px;
+}
+.dropdown select{
+    width:40px;
+}
