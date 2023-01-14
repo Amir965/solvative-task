@@ -23,15 +23,15 @@ const showData = (data) => {
             <tr>
               <td>{ele?.id}</td>
               <td>{ele?.city}</td>
-              {/* <td><img src={require("../../assets/india.jpg")} alt="flag" className="td-img"/> {ele?.country}</td> */}
-              <td>
+              <td className="last-td"><img src={require("../../assets/india.jpg")} alt="flag" className="td-img"/> {ele?.country}</td>
+              {/* <td>
                 <img
                   src={require("../../assets/india.jpg")}
                   alt="flag"
                   className="td-img"
                 />{" "}
                 
-              </td>
+              </td> */}
             </tr>
           );
         })}
