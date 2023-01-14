@@ -1,0 +1,13 @@
+.search input{
+    Width: 241px; 
+    Height: 38px; 
+    Font-size: 16px;
+    Background-color: rgb(255, 255, 255);
+     Border-color: rgb(206, 212, 218);
+      Padding: 0 6px;
+       Padding-left: 12px; 
+        Border-radius: 4px;
+        margin: 20px 0;
+        border-color: #7952b3;
+     box-shadow: 0 0 0 3px rgb(121 82 179 / 25%);
+}
