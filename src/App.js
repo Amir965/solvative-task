@@ -7,12 +7,57 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [dataIndex, setDataIndex] = useState(3);
   const [error, setError] = useState({});
+  const [search, setSearch] = useState("");
+  const [debouncedValue, setDebouncedValue] = useState(search);
+
+
+  const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(dataIndex);
+  const [pageNumberLimit, setPageNumberLimit] = useState(dataIndex);
+  const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(dataIndex);
+  const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
+
+
+  const handleClick = (index) => {
+    setCurrentPage(Number(index));
+  };
+
+  const handleNextBtn = () => {
+    setCurrentPage(currentPage + 1);
+    if (currentPage + 1 > maxPageNumberLimit) {
+      setMaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
+      setMinPageNumberLimit(minPageNumberLimit + pageNumberLimit);
+    }
+  };
+
+  const handlePrevBtn = () => {
+    setCurrentPage(currentPage - 1);
+    if ((currentPage - 1) % pageNumberLimit == 0) {
+      setMaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
+      setMinPageNumberLimit(minPageNumberLimit - pageNumberLimit);
+    }
+  };
+
+
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(search);
+    }, 2000);
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [search, 2000]);
+
+
 
   const fetchData = async () => {
     setLoading(true);
     return await axios
       .get(
-        `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?countryIds=IN&namePrefix=del&limit=${dataIndex}`,
+        `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?offset=${currentPage}&countryIds=IN&namePrefix=${
+          debouncedValue === "" ? "del" : debouncedValue
+        }&limit=${dataIndex}`,
         {
           headers: {
             "x-rapidapi-host": "wft-geo-db.p.rapidapi.com",
@@ -32,12 +77,18 @@ function App() {
         setError(error.response);
       });
   };
-  
 
   useEffect(() => {
     fetchData();
-  }, [dataIndex]);
-  console.log("response from stateManage", { data }, { dataIndex });
+  }, [dataIndex, debouncedValue, currentPage]);
+  console.log(
+    "response from stateManage",
+    { data },
+    { dataIndex },
+    { search },
+    { debouncedValue },
+    { currentPage }
+  );
 
   return (
     <div className="App">
@@ -46,6 +97,16 @@ function App() {
         loading={loading}
         setDataIndex={setDataIndex}
         dataIndex={dataIndex}
+        setSearch={setSearch}
+        search={search}
+        dataLength={data?.metadata?.totalCount}
+        handleClick={handleClick}
+        itemsPerPage={itemsPerPage}
+        handleNextBtn={handleNextBtn}
+        handlePrevBtn={handlePrevBtn}
+        maxPageNumberLimit={maxPageNumberLimit}
+        minPageNumberLimit={minPageNumberLimit}
+        currentPage={currentPage}
       />
     </div>
   );
