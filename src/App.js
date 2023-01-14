@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import "./App.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -10,13 +12,11 @@ function App() {
   const [search, setSearch] = useState("");
   const [debouncedValue, setDebouncedValue] = useState(search);
 
-
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(dataIndex);
   const [pageNumberLimit, setPageNumberLimit] = useState(dataIndex);
   const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(dataIndex);
   const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
-
 
   const handleClick = (index) => {
     setCurrentPage(Number(index));
@@ -32,13 +32,11 @@ function App() {
 
   const handlePrevBtn = () => {
     setCurrentPage(currentPage - 1);
-    if ((currentPage - 1) % pageNumberLimit == 0) {
+    if ((currentPage - 1) % pageNumberLimit === 0) {
       setMaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
       setMinPageNumberLimit(minPageNumberLimit - pageNumberLimit);
     }
   };
-
-
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -48,8 +46,6 @@ function App() {
       clearTimeout(handler);
     };
   }, [search, 2000]);
-
-
 
   const fetchData = async () => {
     setLoading(true);
