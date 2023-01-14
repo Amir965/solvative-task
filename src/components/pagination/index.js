@@ -56,7 +56,7 @@ const Pagination = ({
             <li>
               <button
                 onClick={() => handlePrevBtn()}
-                disabled={currentPage == 0 ? true : false}
+                disabled={currentPage === 0 ? true : false}
               >
                 {"<"}
               </button>
@@ -70,7 +70,7 @@ const Pagination = ({
               <button
                 onClick={() => handleNextBtn()}
                 disabled={
-                  currentPage + 1 == pages[pages.length - 1] ? true : false
+                  currentPage + 1 === pages[pages.length - 1] ? true : false
                 }
               >
                 {">"}
