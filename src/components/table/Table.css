@@ -50,3 +50,6 @@ td,th{
     display: flex;
     justify-content: center;
 }
+.paginationR{
+   margin-right: 40px;
+}

@@ -50,36 +50,41 @@ const Pagination = ({
 
   return (
     <>
-    {data.length===0?"":(<><div>
-        <ul className={style.pageNumbers}>
-          {currentPage !== 0 ? (
-            <li>
-              <button
-                onClick={() => handlePrevBtn()}
-                disabled={currentPage === 0 ? true : false}
-              >
-                {"<"}
-              </button>
-            </li>
-          ) : null}
-          {prevDecrementBtn}
-          {renderPageNumber}
-          {prevIncrementBtn}
-          {currentPage + 1 !== pages[pages.length - 1] ? (
-            <li>
-              <button
-                onClick={() => handleNextBtn()}
-                disabled={
-                  currentPage + 1 === pages[pages.length - 1] ? true : false
-                }
-              >
-                {">"}
-              </button>
-            </li>
-          ) : null}
-        </ul>
-      </div></>)}
-      
+      {data.length === 0 ? (
+        ""
+      ) : (
+        <>
+          <div className="paginationR">
+            <ul className={style.pageNumbers}>
+              {currentPage !== 0 ? (
+                <li>
+                  <button
+                    onClick={() => handlePrevBtn()}
+                    disabled={currentPage === 0 ? true : false}
+                  >
+                    {"<"}
+                  </button>
+                </li>
+              ) : null}
+              {prevDecrementBtn}
+              {renderPageNumber}
+              {prevIncrementBtn}
+              {currentPage + 1 !== pages[pages.length - 1] ? (
+                <li>
+                  <button
+                    onClick={() => handleNextBtn()}
+                    disabled={
+                      currentPage + 1 === pages[pages.length - 1] ? true : false
+                    }
+                  >
+                    {">"}
+                  </button>
+                </li>
+              ) : null}
+            </ul>
+          </div>
+        </>
+      )}
     </>
   );
 };
